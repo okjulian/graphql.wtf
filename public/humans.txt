@@ -1,0 +1,15 @@
+WHAT
+
+graphql.wtf is a weekly GraphQL screencasts website.
+
+TEAM
+
+graphql.wtf is a personal project by Jamie Barton.
+
+TECH
+
+- Next.js - https://nextjs.org
+- GraphQL - https://graphql.org
+- GraphQL Code Generator - https://graphql-code-generator.com
+- GraphCMS (CMS) - https://graphcms.com
+- Tailwind CSS - https://tailwindcss.com
