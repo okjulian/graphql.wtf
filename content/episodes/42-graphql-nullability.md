@@ -87,6 +87,65 @@ If you try to run this against the schema above it won't work, and GraphQL will 
 }
 ```
 
+If we tried to query for a user by `id` that didn't exist in our static users array we'd also get `null` back:
+
+```graphql
+{
+  user(id: "3") {
+    name
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "user": null
+  }
+}
+```
+
+But if we updated the return type to be non-null (`User!`) we'd get an error:
+
+```json
+{
+  "errors": [
+    {
+      "message": "Cannot return null for non-nullable field Query.user.",
+      "locations": [
+        {
+          "line": 2,
+          "column": 3
+        }
+      ],
+      "path": ["user"]
+    }
+  ],
+  "data": null
+}
+```
+
+You might instead want to throw an error that the user was not found for a better API experience:
+
+```ts
+const resolvers = {
+  Query: {
+    users: (): User[] => users,
+    user: (_, { id }): User => {
+      const user = users.find((u) => u.id === id);
+
+      if (!user) throw new GraphQLYogaError("User not found");
+
+      return user;
+    },
+  },
+};
+```
+
+<FYI>
+We're using `GraphQLYogaError` from GraphQL Yoga to throw an error so it is returned to the client. Errors are masked by default, so you'll want to use this to let the error go through.
+</FYI>
+
 Next let's break down the `createUser` mutation:
 
 ```graphql
