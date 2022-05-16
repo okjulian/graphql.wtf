@@ -2,7 +2,7 @@
 title: GraphQL Nullability
 description: Learn how to define nullable and non-nullable fields your GraphQL schema with the schema-first approach.
 published: 2022-05-15
-video: https://www.youtube.com/watch?v=MAaK4FG-oo8
+video: https://www.youtube.com/watch?v=c24Z_aQ0kvM
 repo: https://github.com/graphqlwtf/episode-42-graphql-nullability
 instructor: instructors/jamie-barton.md
 ---
