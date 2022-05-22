@@ -2,7 +2,7 @@
 title: Schema-first or code-first GraphQL
 description: Getting started with GraphQL doesn't always mean you need to write your schema by hand. Instead you can use code-first tools to define both your type definitions and resolvers.
 published: 2022-05-23
-video: https://youtu.be/u1o178b0dAw
+video: https://youtu.be/6VTeNpNHgGc
 repo:
 instructor: instructors/jamie-barton.md
 ---
