@@ -1,8 +1,8 @@
 ---
 title: Schema-first or code-first GraphQL
-description: Learn how to define nullable and non-nullable fields your GraphQL schema with the schema-first approach.
+description: Getting started with GraphQL doesn't always mean you need to write your schema by hand. Instead you can use code-first tools to define both your type definitions and resolvers.
 published: 2022-05-23
-video:
+video: https://youtu.be/u1o178b0dAw
 repo:
 instructor: instructors/jamie-barton.md
 ---
@@ -40,7 +40,7 @@ const schema = new GraphQLSchema({
 });
 ```
 
-Then `graphql-tools` was introduced that gave us the ability to define a schema using SDL (Schema Definition Language) which is today known as a "schema-first".
+Then [Graphql Tools](https://www.graphql-tools.com) was introduced that gave us the ability to define a schema using SDL (Schema Definition Language) which is today known as a "schema-first".
 
 <FYI>
 
@@ -71,7 +71,11 @@ const schema = makeExecutableSchema({
 });
 ```
 
-After the launch of GraphQL Tools, SDL-first soon became a popular way to define schemas. You can see from both examples that SDL-first is appears to be more appealing because you write less verbose code to generate a schema, connect resolvers, and make executable.
+After the launch of GraphQL Tools, SDL-first soon became a popular way to define schemas. You can see from both examples that SDL-first appears to be more appealing because you write less verbose code to generate a schema, connect resolvers, and make executable.
+
+SDL-first remains a popular choice today, and this is due to most of the "getting started" tutorials for almost every GraphQL server framework uses it.
+
+---
 
 If we wanted to expand on our SDL we can update our `typeDefs` value to include some new types, and write those using the SDL:
 
@@ -94,13 +98,15 @@ Here we've added a new query that returns a list of non-null users, and created 
 
 Then all we need to do now is add a resolver to return the `users` query like we did with our `hello` resolver, and we have a functioning GraphQL API.
 
-If we were to do this with the code-first approach, it would result in a lot more code required, which is why SDL-first is often favored.
+If we were to do this with the code-first approach, it would result in a lot more code required since we can type our schema as text. This is why SDL-first is often favored.
 
-Since both the schema and resolvers must match in order to work, it's very easy to get these out of sync, or create bugs, not only due to the lack of types, but as a schema grows, it gets more difficult to maintain.
+Since both the schema and resolvers must match in order to work, it's very easy to get these out of sync, or create bugs. Not only due to the lack of types, but as a schema grows, it gets more difficult to maintain.
 
-There are tools such as [GraphQL Code Generator]() that can creates types automatically from the SDL, but this can lead to complexity of your server setup when you grow, and use libraries like [GraphQL Modules]().
+There are tools such as [GraphQL Code Generator](https://www.graphql-code-generator.com/) that can creates types automatically from the SDL, but this can lead to complexity of your server setup when you grow, and use libraries like [GraphQL Modules](https://www.graphql-modules.com/).
 
-Let's now look at an example of Pothos for building code-first schemas:
+---
+
+Let's now look at an example of [Pothos](https://www.pothos-graphql.dev) for building code-first schemas:
 
 ```js
 import { createServer } from "@graphql-yoga/node";
