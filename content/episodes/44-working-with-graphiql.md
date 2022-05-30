@@ -6,3 +6,5 @@ video: https://youtu.be/L5bzHzqUn9M
 repo:
 instructor: instructors/jamie-barton.md
 ---
+
+Get the code for [GraphiQL on GitHub](https://github.com/graphql/graphiql).
