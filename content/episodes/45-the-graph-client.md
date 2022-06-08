@@ -191,7 +191,7 @@ touch index.ts
 
 The `codegen` script we created earlier generated a ready to use SDK that allows us to execute queries, and pass any applicable variables to.
 
-Inside `index.ts`, import `getBuiltGraphSDK` from the generated file `./graphqclient/index.ts`:
+Inside `index.ts`, import `getBuiltGraphSDK` from the generated file `./graphclient/index.ts`:
 
 ```ts
 import { getBuiltGraphSDK } from "./.graphclient";
