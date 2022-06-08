@@ -7,7 +7,7 @@ repo: https://github.com/graphqlwtf/episode-45-the-graph-client
 instructor: instructors/jamie-barton.md
 ---
 
-In this tutorial we'll learn how to use The Graph Client to query across the Ethereum network using The Graph, and connected subgraphs.
+In this tutorial we'll learn how to use The [Graph Client](https://github.com/graphprotocol/graph-client) to query across the Ethereum network using The Graph, and connected subgraphs.
 
 Let's begin by creating a new project and initializing NPM.
 
@@ -59,18 +59,18 @@ npm install --save-dev @graphprotocol/client-cli
 
 With this installed we can now create our config so Graph Client can successfully generate the SDK.
 
-In the root of your project we'll need to create the following file:
+In the root of your project we'll need to create the following files:
 
 ```bash
 touch .graphclientrc.yml
+touch index.ts
 ```
 
-Here we can create our list of `sources` (subgraphs), and specify where our GraphQL queries will live.
+Inside `.graphclientrc.yml` we'll add list of `sources` (subgraphs), and specify where our GraphQL queries will live.
 
 We'll use the ENS Subgraph as a source example:
 
 ```yml
-documents: "./graphql/*.{gql,graphql}"
 sources:
   - name: ENS
     handler:
@@ -78,17 +78,69 @@ sources:
         endpoint: https://api.thegraph.com/subgraphs/name/ensdomains/ens
 ```
 
-Now we can update `package.json` to include a script to run the graph client build command:
+Now we can update `package.json` to include a script to run the graph client `build`, and `serve-dev` commands:
 
 ```json
 {
   "scripts": {
-    "codegen": "graphclient build"
+    "codegen": "graphclient build",
+    "dev": "graphclient serve-dev"
   }
 }
 ```
 
-Next we'll create a GraphQL query that fetches registrations from the ENS subgraph.
+This alone will provide us everything we need to query the ENS subgraph.
+
+If you now run the `dev` command, we'll automatically be taken to the GraphiQL UI to execute some queries against the configured subgraphs:
+
+```bash
+npm run dev
+```
+
+You should now see output that looks a little something like...
+
+```bash
+💡 🕸️  Mesh - Server Generating the unified schema...
+💡 🕸️  Mesh Generating index file in TypeScript
+💡 🕸️  Mesh - Server Serving Composed Graph: http://0.0.0.0:4000
+💡 🕸️  Mesh Writing index.ts for CJS to the disk.
+```
+
+We should now be able to visit [`http://localhost:4000`](http://localhost:4000), explore GraphiQL docs, and execute queries.
+
+If you run the following query you should get results from the ENS subgraph.
+
+```graphql
+query GetLatestRegistrations {
+  registrations {
+    id
+    expiryDate
+    domain {
+      name
+    }
+  }
+}
+```
+
+Now that we have confirmed everything is working, we can next explore the output from the `codegen` script we ran earlier.
+
+The folder `.graphclient` should look a little something like:
+
+```bash
+.graphclient
+├── index.ts
+├── schema.graphql
+└── sources
+    └── ENS
+        ├── introspectionSchema.ts
+        └── schema.graphql
+```
+
+Inside `.graphclient/index.ts` you should notice the export `execute`. It's with this we can execute queries programmatically against the configured subgraphs, however, for this tutorial we'll focus on generating a `DocumentNode` that is fully typed so we can use it with `execute`.
+
+## Code generation and type safety
+
+Let's create a new directory, and our first GraphQL query document file:
 
 ```bash
 mkdir graphql
@@ -109,15 +161,13 @@ query GetLatestRegistrations {
 }
 ```
 
-If we now run the codegen script in our terminal we'll get an SDK we can use to execute that query.
+If we now run the codegen script in our terminal we'll get an SDK we can use to execute the query `GetLatestRegistrations`:
 
 ```bash
 npm run codegen
 ```
 
-We should now see that we have a new directory, and files generated in the root of our project.
-
-The folder `.graphclient` should look a little something like:
+We should now see new files generated inside the `.graphclient` folder. The `.graphclient` folder should look a little something like:
 
 ```bash
 .graphclient
@@ -137,55 +187,6 @@ Inside `index.ts` you should see some exports related to the query we wrote prev
 - `GetLatestRegistrationsQuery`
 - `GetLatestRegistrationsDocument`
 - `GetLatestRegistrations` (inside the `getSdk` function)
-
-Next let's explore the ENS subgraph by using `graphclient serve-dev`. Inside `package.json` add the following script:
-
-```json
-{
-  "scripts": {
-    "dev": "graphclient serve-dev"
-  }
-}
-```
-
-Then run it!
-
-```bash
-npm run dev
-```
-
-You should now see output that looks a little something like...
-
-```bash
-💡 🕸️  Mesh - Server Generating the unified schema...
-💡 🕸️  Mesh Generating index file in TypeScript
-💡 🕸️  Mesh - Server Serving Composed Graph: http://0.0.0.0:4000
-💡 🕸️  Mesh Writing index.ts for CJS to the disk.
-```
-
-We should now be able to visit [`http://localhost:4000`](http://localhost:4000), explore GraphiQL docs, and execute queries.
-
-If we take the query we had previously written in our `.graphql` file and run it here, we should see the results.
-
-```graphql
-query GetLatestRegistrations {
-  registrations {
-    id
-    expiryDate
-    domain {
-      name
-    }
-  }
-}
-```
-
-While it's fun to explore these queries inside GraphiQL, the real power of Graph Client comes when we want to run queries we generated above using the `codegen` script.
-
-First, we'll create a new file:
-
-```bash
-touch index.ts
-```
 
 ## Using the SDK
 
@@ -219,7 +220,7 @@ If you run this using `npm start` you will see in the console registrations fetc
 
 ## Using the execute function
 
-If you didn't want to execute the generated SDK function for queries, you can also use the `execute` function to perform an operation against the subgraphs.
+If you didn't want to execute the generated SDK function for queries, you can also use the `execute` function to perform an operation against the subgraphs as hinted at previously.
 
 We'll import both `execute` and `GetLatestRegistrationsDocument` from the generated `.graphclient`:
 
