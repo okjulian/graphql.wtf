@@ -54,7 +54,7 @@ const EpisodePage: NextPage<IProps> = ({
           images: [
             {
               url:
-                `https://graphql.wtf/${episode?.cover}` ??
+                `https://graphql.wtf${episode?.cover}` ??
                 "https://graphql.wtf/graphql-wtf.png",
               width: 1200,
               height: 526,
