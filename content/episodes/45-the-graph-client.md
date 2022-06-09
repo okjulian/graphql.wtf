@@ -1,13 +1,13 @@
 ---
 title: The Graph Client
-description: Generate code automatically to query from the Ethereum network using The Graph Client.
+description: Generate a fully typed SDK automatically to query the Ethereum network using The Graph Client.
 published: 2022-06-06
-video:
+video: https://youtu.be/ZsRAmyUtvwg
 repo: https://github.com/graphqlwtf/episode-45-the-graph-client
 instructor: instructors/jamie-barton.md
 ---
 
-In this tutorial we'll learn how to use The [Graph Client](https://github.com/graphprotocol/graph-client) to query across the Ethereum network using The Graph, and connected subgraphs.
+In this tutorial we'll learn how to use The [Graph Client](https://github.com/graphprotocol/graph-client) to query across the Ethereum network using [The Graph](https://thegraph.com), and connected subgraphs.
 
 Let's begin by creating a new project and initializing NPM.
 
@@ -29,12 +29,12 @@ Finally, create the file `tsconfig.json` in the root of the project and add the 
 ```json
 {
   "compilerOptions": {
-    "target": "esnext",
-    "moduleResolution": "node",
+    "target": "es2016",
     "module": "commonjs",
-    "sourceMap": true,
-    "lib": ["esnext", "DOM", "DOM.Iterable"],
-    "allowSyntheticDefaultImports": true
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true
   }
 }
 ```
@@ -68,7 +68,7 @@ touch index.ts
 
 Inside `.graphclientrc.yml` we'll add list of `sources` (subgraphs), and specify where our GraphQL queries will live.
 
-We'll use the ENS Subgraph as a source example:
+We'll use the [ENS Subgraph](https://thegraph.com/explorer/subgraph?id=EjtE3sBkYYAwr45BASiFp8cSZEvd1VHTzzYFvJwQUuJx&view=Overview) as a source example:
 
 ```yml
 sources:
