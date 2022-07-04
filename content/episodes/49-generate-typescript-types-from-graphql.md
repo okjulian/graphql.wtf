@@ -2,7 +2,7 @@
 title: Generate TypeScript Types from GraphQL
 description: Automatically generate types for your local or remote GraphQL schema, and operations for better type-safety.
 published: 2022-07-04
-video: https://youtu.be/8C-FfmH9-c4
+video: https://youtu.be/Ob3MRkgQdcc
 repo: https://github.com/graphqlwtf/episode-49-typescript-types-for-graphql/blob/main/codegen.yml
 instructor: instructors/jamie-barton.md
 ---
