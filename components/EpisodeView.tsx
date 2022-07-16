@@ -46,7 +46,7 @@ function EpisodeView({ episode, previousEpisode, nextEpisode }: Props) {
 
   return (
     <>
-      <div className="bg-[#3E0F3F] bg-gradient-to-tl from-haiti via-haiti to-[#3E0F3F] relative overflow-hidden">
+      <div className="bg-haiti relative overflow-hidden">
         <Nav />
         <div className="max-w-6xl mx-auto px-6 lg:px-0 pb-6 md:pt-6 space-y-6 relative z-20">
           <EpisodePlayer

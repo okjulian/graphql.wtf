@@ -11,7 +11,7 @@ export const IndexView = ({ episodes = [] }: { episodes: IEpisode[] }) => {
 
   return (
     <Fragment>
-      <div className="bg-[#3E0F3F] bg-gradient-to-tl from-haiti via-haiti to-[#3E0F3F] relative overflow-hidden">
+      <div className="bg-haiti relative overflow-hidden">
         <Nav />
         <div className="max-w-6xl mx-auto px-6 xl:px-0 relative z-20">
           <div className="py-12 md:py-24 lg:pb-36">

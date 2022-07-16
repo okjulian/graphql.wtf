@@ -30,7 +30,7 @@ export default function CoursesPage() {
           ],
         }}
       />
-      <div className="bg-[#3E0F3F] bg-gradient-to-tl from-haiti via-haiti to-[#3E0F3F] relative overflow-hidden">
+      <div className="bg-haiti relative overflow-hidden">
         <Nav />
         <div className="mx-auto flex items-center justify-center relative p-6 pb-12 md:p-12 lg:pb-32">
           <div className="text-center space-y-4 md:space-y-6 max-w-4xl z-10 relative">
