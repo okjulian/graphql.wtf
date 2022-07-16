@@ -5,11 +5,21 @@ function SubscribeForm({ intent = "subscribe" }) {
   const [email, setEmail] = useState(null);
   const [submitted, setSubmitted] = useState(false);
 
-  const subscribe = () => {
-    setSubmitted(true);
+  const subscribe = async (e) => {
+    e.preventDefault();
 
     splitbee.user.set({ email });
     splitbee.track(intent, { email });
+
+    fetch("/api/subscribe", {
+      method: "POST",
+      body: JSON.stringify({ trigger: { data: { email } } }),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then(() => setSubmitted(true))
+      .catch(console.error);
   };
 
   if (submitted)

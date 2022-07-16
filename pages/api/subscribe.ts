@@ -11,16 +11,15 @@ interface Req extends NextApiRequest {
 }
 export default async (req: Req, res: NextApiResponse) => {
   try {
-    const { email } = req.body?.trigger?.data;
-
-    const response = await fetch("https://www.getrevue.co/api/subscribers", {
+    const response = await fetch("https://www.getrevue.co/api/v2/subscribers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${process.env.REVUE_API_KEY}`,
       },
       body: JSON.stringify({
-        email,
+        email: req?.body?.trigger?.data?.email,
+        double_opt_in: false,
       }),
     });
 
