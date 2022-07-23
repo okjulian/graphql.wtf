@@ -2,8 +2,8 @@
 title: GraphQL Subscriptions with Server Sent Events
 description: Learn how to subscribe, and post to PubSub topics using GraphQL Subscriptions, Server Sent Events, and GraphQL Yoga.
 published: 2022-07-25
-video:
-repo:
+video: https://youtu.be/oZtTut7QsZ8
+repo: https://github.com/graphqlwtf/episode-52-graphql-subscriptions-with-server-sent-events
 instructor: instructors/jamie-barton.md
 ---
 
