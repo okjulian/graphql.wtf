@@ -7,7 +7,7 @@ repo: https://github.com/graphqlwtf/episode-52-graphql-subscriptions-with-server
 instructor: instructors/jamie-barton.md
 ---
 
-GraphQL Subscriptions lays the foundations to subscribe to data changes. Subscriptions are great for knowing what, and why data changed. If you're working with real-time data such as a chat application or notification then GraphQL Subscriptions will get you quite far.
+GraphQL Subscriptions lay the foundations to subscribe to data changes. Subscriptions are great for knowing what, and why data changed. If you're working with real-time data such as a chat application or notification then GraphQL Subscriptions will get you quite far.
 
 GraphQL Subscriptions are often used via WebSockets, but we'll leave that for another lesson. Today we'll explore using [Server Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) which comes as the default transport mechanism with GraphQL Yoga.
 
