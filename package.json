@@ -4,7 +4,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next",
-    "start": "next start"
+    "start": "next start",
+    "predev": "contentlayer build"
   },
   "dependencies": {
     "@headlessui/react": "1.4.3",
