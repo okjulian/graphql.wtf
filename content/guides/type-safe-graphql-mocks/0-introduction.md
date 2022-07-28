@@ -2,7 +2,7 @@
 title: Introduction
 description: In this guide, you will set up tests that mock GraphQL responses in a type-safe way using NextJS, Jest, MSW and GraphQL Codegen.
 published: 2022-08-01
-video: https://youtu.be/ZQEFIV0rgNY
+video: https://youtu.be/MEfx26BXgpM
 repo: https://github.com/okjulian/type-safe-graphql-mocks-msw
 instructor: instructors/okjulian.md
 ---

@@ -2,7 +2,7 @@
 title: Step 3 - Mocking GraphQL query inside test using MSW
 description: In this step you will add a library to your test that intercepts requests and returns mock results. This results in faster and more robust tests. Faster because you cut out the slowest link in this setup, the network. More robust because you get consistent API responses.
 published: 2022-08-01
-video: https://youtu.be/1zRwEQuMsJ4
+video: https://youtu.be/6whloqSiP2U
 repo: https://github.com/okjulian/type-safe-graphql-mocks-msw
 instructor: instructors/okjulian.md
 ---
