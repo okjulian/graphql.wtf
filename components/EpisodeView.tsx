@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
-import { Episode as IEpisode } from "contentlayer/generated";
+import { Episode as IEpisode, GuideEpisode } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 import { Switch } from "@headlessui/react";
@@ -9,15 +9,20 @@ import { useRouter } from "next/router";
 import Nav from "@/components/Nav";
 import Link from "@/components/Link";
 import EpisodePlayer from "@/components/EpisodePlayer";
-import Episode from "@/components/Episode";
 import Share from "@/components/Share";
 import { FYI } from "@/components/FYI";
 
 type Props = {
-  episode: IEpisode | null;
-  previousEpisode?: IEpisode;
-  nextEpisode?: IEpisode;
+  episode: IEpisode | GuideEpisode | null;
+  previousEpisode?: IEpisode | GuideEpisode | null;
+  nextEpisode?: IEpisode | GuideEpisode | null;
 };
+
+function isGuideEpisode(
+  episode: IEpisode | GuideEpisode
+): episode is GuideEpisode {
+  return "guide" in episode;
+}
 
 function EpisodeView({ episode, previousEpisode, nextEpisode }: Props) {
   const router = useRouter();
@@ -25,8 +30,6 @@ function EpisodeView({ episode, previousEpisode, nextEpisode }: Props) {
   // const { instructor, published, related } = episode;
   const { instructor, published } = episode;
   const [autoplayEnabled, setAutoplayEnabled] = useState(!!nextEpisode);
-
-  console.log({ instructor });
 
   const date = new Date(published);
 
@@ -37,8 +40,17 @@ function EpisodeView({ episode, previousEpisode, nextEpisode }: Props) {
   }).format(new Date(date.getTime() - date.getTimezoneOffset() * -60000));
 
   const goToNextEpisode = () => {
-    if (autoplayEnabled && nextEpisode) {
-      router.push(`/episodes/${nextEpisode.slug}`);
+    if (autoplayEnabled) {
+      if (isGuideEpisode(nextEpisode)) {
+        // Doing this weird thing to fix the following nextjs error
+        // https://nextjs.org/docs/messages/href-interpolation-failed
+        router.push({
+          pathname: "",
+          query: { guide: nextEpisode.guide, step: nextEpisode.slug },
+        });
+      } else {
+        router.push(`/episodes/${nextEpisode.slug}`);
+      }
     }
   };
 
@@ -59,7 +71,17 @@ function EpisodeView({ episode, previousEpisode, nextEpisode }: Props) {
             <div>
               {previousEpisode && (
                 <Link
-                  href={previousEpisode.url}
+                  href={
+                    isGuideEpisode(previousEpisode)
+                      ? {
+                          pathname: "",
+                          query: {
+                            guide: previousEpisode.guide,
+                            step: previousEpisode.slug,
+                          },
+                        }
+                      : previousEpisode.url
+                  }
                   className="text-white flex items-center space-x-3 group"
                 >
                   <ChevronLeftIcon className="text-white text-opacity-50 group-hover:text-opacity-100 transition w-6 h-6" />
@@ -92,7 +114,17 @@ function EpisodeView({ episode, previousEpisode, nextEpisode }: Props) {
                   </div>
 
                   <Link
-                    href={nextEpisode.url}
+                    href={
+                      isGuideEpisode(nextEpisode)
+                        ? {
+                            pathname: "",
+                            query: {
+                              guide: nextEpisode.guide,
+                              step: nextEpisode.slug,
+                            },
+                          }
+                        : nextEpisode.url
+                    }
                     className="flex items-center space-x-3 group text-right"
                   >
                     <div>

@@ -3,15 +3,22 @@ import NextLink from "next/link";
 const stripTrailingSlash = (href) => {
   if (href === "/") return href;
 
+  if (typeof href !== "string") {
+    return href;
+  }
+
   return href.endsWith("/") ? href.slice(0, -1) : href;
 };
 
 function Link({ href, children, ...props }) {
   if (!href) return null;
 
-  const anchorLink = href.startsWith("#");
+  const anchorLink = typeof href === "string" ? href.startsWith("#") : "";
 
-  if (href.includes("http") || href.includes("mailto") || anchorLink) {
+  if (
+    typeof href === "string" &&
+    (href.includes("http") || href.includes("mailto") || anchorLink)
+  ) {
     return (
       <a
         href={stripTrailingSlash(href)}

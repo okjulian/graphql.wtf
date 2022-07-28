@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 // import { Disclosure } from "@headlessui/react";
 // import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import cc from "classcat";
+import { AcademicCapIcon } from "@heroicons/react/outline";
 
 const PlayIcon = () => (
   <svg
@@ -45,7 +46,12 @@ const CollectionIcon = () => (
 
 const navigation = [
   { name: "Episodes", href: "/", icon: PlayIcon },
-  { name: "Courses", href: "/courses", icon: CollectionIcon },
+  { name: "Guides", href: "/guides", icon: CollectionIcon },
+  {
+    name: "Courses",
+    href: "/courses",
+    icon: () => <AcademicCapIcon className="h-5 w-5" />,
+  },
   // { name: "Workshops", href: "/workshops" },
 ];
 
