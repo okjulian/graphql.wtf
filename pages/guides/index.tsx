@@ -14,7 +14,7 @@ import { GetStaticProps, NextPage } from "next";
 
 interface IProps {
   guides: Guide[];
-  guideEpisodes: Record<Guide["title"], GuideEpisode>;
+  guideEpisodes: Record<Guide["slug"], GuideEpisode>;
 }
 
 const GuidesPage: NextPage<IProps> = function GuidesPage({
@@ -120,7 +120,7 @@ export default GuidesPage;
 export const getStaticProps: GetStaticProps<IProps> =
   async function getStaticProps({ params }) {
     const guides = allGuides;
-    let guideEpisodes: Record<Guide["title"], GuideEpisode> = {};
+    let guideEpisodes: Record<Guide["slug"], GuideEpisode> = {};
 
     for (const guideEpisode of allGuideEpisodes) {
       if (guideEpisode.position === 0) {

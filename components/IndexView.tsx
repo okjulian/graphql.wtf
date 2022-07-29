@@ -1,13 +1,27 @@
 import { Fragment } from "react";
-import { Episode as IEpisode } from "contentlayer/generated";
+import {
+  Episode as IEpisode,
+  Guide as IGuide,
+  GuideEpisode,
+} from "contentlayer/generated";
 
 import Nav from "@/components/Nav";
 import SubscribeForm from "@/components/SubscribeForm";
 import Episode from "@/components/Episode";
 import EpisodeList from "@/components/EpisodeList";
+import Guide from "./Guide";
 
-export const IndexView = ({ episodes = [] }: { episodes: IEpisode[] }) => {
+export const IndexView = ({
+  episodes = [],
+  guides = [],
+  guideEpisodes = {},
+}: {
+  episodes: IEpisode[];
+  guides: IGuide[];
+  guideEpisodes: Record<IGuide["slug"], GuideEpisode>;
+}) => {
   const [latestEpisode, ...remainingEpisodes] = episodes;
+  const [latestGuide, ...remainingGuides] = guides;
 
   return (
     <Fragment>
@@ -31,7 +45,17 @@ export const IndexView = ({ episodes = [] }: { episodes: IEpisode[] }) => {
                 </div>
               </div>
               <div className="w-full lg:w-96">
-                <Episode {...latestEpisode} featured />
+                {new Date(latestEpisode.published).getTime() -
+                  new Date(latestGuide.published).getTime() >
+                0 ? (
+                  <Episode {...latestEpisode} featured />
+                ) : (
+                  <Guide
+                    {...latestGuide}
+                    firstEpisode={guideEpisodes[latestGuide.slug]}
+                    featured
+                  />
+                )}
               </div>
             </div>
           </div>

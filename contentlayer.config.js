@@ -187,6 +187,11 @@ const Guide = defineDocumentType(() => ({
         type: "string",
       },
     },
+    published: {
+      type: "date",
+      required: true,
+      description: "The public facing published date",
+    },
   },
   computedFields: {
     slug: {
