@@ -45,7 +45,11 @@ function Guide({
                 New guide
               </div>
             )}
-            {/* {cover && <Image src={cover} layout="fill" alt={title} />} */}
+            <Image
+              src={`/images/guides/${slug}/index.png`}
+              layout="fill"
+              alt={title}
+            />
           </div>
           <div className="w-full space-y-3 pt-3 md:pt-6">
             <p className="font-extrabold text-xl md:text-2xl text-haiti group-hover:text-razzmatazz transition-colors tracking-tight">

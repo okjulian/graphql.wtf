@@ -2,7 +2,7 @@
 title: Step 1 - Displaying cart items
 description: In this step you're going to display cart items in the browser. To do this, you will setup a NextJs application and fetch cart items from a GraphQL API.
 published: 2022-08-01
-video: https://youtu.be/aLgX31wYJDw
+video: https://youtu.be/QR3VQ9LfKas
 repo: https://github.com/okjulian/type-safe-graphql-mocks-msw
 instructor: instructors/okjulian.md
 ---

@@ -2,7 +2,7 @@
 title: Step 4 - Adding types using GraphQL Codegen
 description: Remember the annoying `// @ts-ignore` in `pages/index.tsx`? That's because `useCart` is not type safe yet. Let's fix that using GraphQL Codegen.
 published: 2022-08-01
-video: https://youtu.be/WVy8r1Jd71M
+video: https://youtu.be/Syx2LsM9ADc
 repo: https://github.com/okjulian/type-safe-graphql-mocks-msw
 instructor: instructors/okjulian.md
 ---

@@ -2,7 +2,7 @@
 title: Step 2 - Testing cart items page
 description: In this step you're going to setup Jest to test NextJs pages, and then write a test to verify the functionality of the cart page.
 published: 2022-08-01
-video: https://youtu.be/RHE8xeXM0vI
+video: https://youtu.be/Fhsn5FZz_KM
 repo: https://github.com/okjulian/type-safe-graphql-mocks-msw
 instructor: instructors/okjulian.md
 ---

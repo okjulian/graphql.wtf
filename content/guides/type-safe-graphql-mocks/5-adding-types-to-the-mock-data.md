@@ -2,7 +2,7 @@
 title: Step 5 - Adding types to the mock data
 description: Like tests, types increase your confidence in your code, so leveraging the power of both techniques is a good idea. Another benefit is a nicer development experience with mock autocompletion.
 published: 2022-08-01
-video: https://youtu.be/holWC60wz78
+video: https://youtu.be/dgyNR8iw2Sk
 repo: https://github.com/okjulian/type-safe-graphql-mocks-msw
 instructor: instructors/okjulian.md
 ---
